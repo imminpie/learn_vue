@@ -18,6 +18,15 @@ export default {
       month: 1,
     };
   },
+  // watch: {감시할데이터(변경 후 데이터, 변경 전 데이터) {}}
+  watch: {
+    month(value) {
+      if (isNaN(value) == true) {
+        alert('문자열은 입력할 수 없습니다.');
+        this.month = 1;
+      }
+    },
+  },
   props: {
     products: Array,
     roomDetail: Number,

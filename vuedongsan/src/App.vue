@@ -1,36 +1,34 @@
 <template>
-  <div class="black-bg" v-if="isModal === true">
-    <div class="white-bg">
-      <img :src="products[roomDetail].image" style="width: 100%" />
-      <h4>{{ products[roomDetail].title }}</h4>
-      <p>{{ products[roomDetail].content }}</p>
-      <p>{{ products[roomDetail].price }} 원</p>
-      <button @click="openModal">닫기</button>
-    </div>
-  </div>
+  <TheModal
+    v-if="isModal"
+    :roomDetail="roomDetail"
+    :products="products"
+    :isModal="isModal"
+    :openModal="openModal"
+  />
 
   <div class="menu">
     <!-- v-for='작명 in 몇회' :key='작명' -->
     <a v-for="menu_items in menu" :key="menu_items" href="#">{{ menu_items }}</a>
   </div>
 
-  <div v-for="(products_items, idx) in products" :key="idx">
-    <img :src="products_items.image" alt="room" class="room-img" />
-    <h4
-      @click="
-        openModal();
-        openRoomDetail(idx);
-      "
-      :style="orange"
-    >
-      {{ products_items.title }}
-    </h4>
-    <p>{{ products_items.price }}</p>
-  </div>
+  <TheDiscount />
+
+  <TheCard
+    v-for="(products_items, idx) in products"
+    :key="products_items"
+    :products="products[idx]"
+    :openModal="openModal"
+    :openRoomDetail="openRoomDetail"
+    :idx="idx"
+  />
 </template>
 
 <script>
 import room from './assets/data/room.js';
+import TheDiscount from './components/TheDiscount.vue';
+import TheModal from './components/TheModal.vue';
+import TheCard from './components/TheCard.vue';
 export default {
   name: 'App',
   data() {
@@ -38,7 +36,6 @@ export default {
       products: room,
       roomDetail: 0,
       menu: ['Home', 'Shop', 'About'],
-      orange: 'color:orange',
       isModal: false,
     };
   },
@@ -50,7 +47,11 @@ export default {
       this.roomDetail = idx;
     },
   },
-  components: {},
+  components: {
+    TheDiscount,
+    TheModal,
+    TheCard,
+  },
 };
 </script>
 
@@ -67,19 +68,6 @@ body {
 }
 div {
   box-sizing: border-box;
-}
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
 }
 .menu {
   background: darkslateblue;

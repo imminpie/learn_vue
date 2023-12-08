@@ -32,6 +32,13 @@ export default {
     roomDetail: Number,
     openModal: Function,
   },
+  beforeUpdate() {
+    // 데이터가 변경되고 DOM 이 업데이트되기 전에 실행할 코드 작성
+    if (this.month === '2') {
+      alert('2개월은 너무 적음.. 안팝니다!');
+      this.month = 1;
+    }
+  },
 };
 </script>
 <style>

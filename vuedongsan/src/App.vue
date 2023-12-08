@@ -14,7 +14,7 @@
     <a v-for="menu_items in menu" :key="menu_items" href="#">{{ menu_items }}</a>
   </div>
 
-  <TheDiscount />
+  <TheDiscount v-if="showDiscount" :discountPercent="discountPercent" />
 
   <button @click="priceSort">낮은 가격순</button>
   <button @click="priceReverseSort">높은 가격순</button>
@@ -45,6 +45,8 @@ export default {
       roomDetail: 0,
       menu: ['Home', 'Shop', 'About'],
       isModal: false,
+      showDiscount: true,
+      discountPercent: 30,
     };
   },
   methods: {
@@ -77,6 +79,22 @@ export default {
       // 등호로 배열을 집어넣으면 값을 서로 공유해주세요~ 가 된다.
       this.products = [...this.productsOriginal];
     },
+  },
+  created() {
+    // DOM 에 마운트되기 전에 실행될 코드 작성
+    // 일반적으로 서버에서 데이터를 가져올 때
+    // created 또는 mounted 내부에 코드를 작성한다.
+  },
+  mounted() {
+    // DOM 에 마운트 후에 실행될 코드 작성
+    const timerId = setInterval(() => {
+      if (this.discountPercent > 0) {
+        this.discountPercent -= 1;
+      } else {
+        clearInterval(timerId);
+        this.showDiscount = false;
+      }
+    }, 1000);
   },
   components: {
     TheDiscount,

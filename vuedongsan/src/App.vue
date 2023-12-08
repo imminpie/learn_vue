@@ -1,11 +1,13 @@
 <template>
-  <TheModal
-    v-if="isModal"
-    :roomDetail="roomDetail"
-    :products="products"
-    :isModal="isModal"
-    @closeModal="openModal"
-  />
+  <Transition name="fade">
+    <TheModal
+      v-if="isModal"
+      :roomDetail="roomDetail"
+      :products="products"
+      :isModal="isModal"
+      @closeModal="openModal"
+    />
+  </Transition>
 
   <div class="menu">
     <!-- v-for='작명 in 몇회' :key='작명' -->
@@ -68,6 +70,17 @@ body {
 }
 div {
   box-sizing: border-box;
+}
+.fade-enter-from {
+  /* 시작 스타일 */
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 1s;
+}
+.fade-enter-to {
+  /* 종료 스타일 */
+  opacity: 1;
 }
 .menu {
   background: darkslateblue;

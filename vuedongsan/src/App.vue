@@ -4,7 +4,7 @@
     :roomDetail="roomDetail"
     :products="products"
     :isModal="isModal"
-    :openModal="openModal"
+    @closeModal="openModal"
   />
 
   <div class="menu">

@@ -5,7 +5,7 @@
       <h4>{{ products[roomDetail].title }}</h4>
       <p>{{ products[roomDetail].content }}</p>
       <p>{{ products[roomDetail].price }} 원</p>
-      <button @click="openModal">닫기</button>
+      <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
 </template>

@@ -1,9 +1,11 @@
 <template>
-  <div class="black-bg" v-if="modal === true">
+  <div class="black-bg" v-if="isModal === true">
     <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>상세페이지내용임</p>
-      <button @click="isModal">닫기</button>
+      <img :src="products[roomDetail].image" style="width: 100%" />
+      <h4>{{ products[roomDetail].title }}</h4>
+      <p>{{ products[roomDetail].content }}</p>
+      <p>{{ products[roomDetail].price }} 원</p>
+      <button @click="openModal">닫기</button>
     </div>
   </div>
 
@@ -12,33 +14,40 @@
     <a v-for="menu_items in menu" :key="menu_items" href="#">{{ menu_items }}</a>
   </div>
 
-  <div v-for="(products_items, idx) in products" :key="products_items">
-    <img :src="require(`@/assets/room${idx}.jpg`)" alt="room" class="room-img" />
-    <h4 @click="isModal" :style="orange">{{ products_items }}</h4>
-    <p>50 만원</p>
-    <button @click="increase(idx)">허위매물신고</button>
-    <span>신고수 : {{ count[idx] }}</span>
+  <div v-for="(products_items, idx) in products" :key="idx">
+    <img :src="products_items.image" alt="room" class="room-img" />
+    <h4
+      @click="
+        openModal();
+        openRoomDetail(idx);
+      "
+      :style="orange"
+    >
+      {{ products_items.title }}
+    </h4>
+    <p>{{ products_items.price }}</p>
   </div>
 </template>
 
 <script>
+import room from './assets/data/room.js';
 export default {
   name: 'App',
   data() {
     return {
-      products: ['역삼동원룸', '천호동원룸', '마포구원룸'],
+      products: room,
+      roomDetail: 0,
       menu: ['Home', 'Shop', 'About'],
       orange: 'color:orange',
-      count: [0, 0, 0],
-      modal: false,
+      isModal: false,
     };
   },
   methods: {
-    increase(idx) {
-      this.count[idx] += 1;
+    openModal() {
+      this.isModal = !this.isModal;
     },
-    isModal() {
-      this.modal = !this.modal;
+    openRoomDetail(idx) {
+      this.roomDetail = idx;
     },
   },
   components: {},

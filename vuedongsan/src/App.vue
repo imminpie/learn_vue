@@ -4,11 +4,11 @@
     <a v-for="menu_items in menu" :key="menu_items" href="#">{{ menu_items }}</a>
   </div>
 
-  <img alt="Vue logo" src="./assets/logo.png" />
-
   <div v-for="(products_items, idx) in products" :key="products_items">
-    <h4 :style="orange">{{ idx }} {{ products_items }}</h4>
+    <h4 :style="orange">{{ products_items }}</h4>
     <p>50 만원</p>
+    <button @click="increase(idx)">허위매물신고</button>
+    <span>신고수 : {{ count[idx] }}</span>
   </div>
 </template>
 
@@ -17,10 +17,16 @@ export default {
   name: 'App',
   data() {
     return {
-      orange: 'color : orange',
       products: ['역삼동원룸', '천호동원룸', '마포구원룸'],
       menu: ['Home', 'Shop', 'About'],
+      orange: 'color:orange',
+      count: [0, 0, 0],
     };
+  },
+  methods: {
+    increase(idx) {
+      this.count[idx] += 1;
+    },
   },
   components: {},
 };
@@ -33,7 +39,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .menu {
   background: darkslateblue;

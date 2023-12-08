@@ -16,6 +16,11 @@
 
   <TheDiscount />
 
+  <button @click="priceSort">낮은 가격순</button>
+  <button @click="priceReverseSort">높은 가격순</button>
+  <button @click="titleSort">이름순</button>
+  <button @click="sortBack">초기화</button>
+
   <TheCard
     v-for="(products_items, idx) in products"
     :key="products_items"
@@ -35,6 +40,7 @@ export default {
   name: 'App',
   data() {
     return {
+      productsOriginal: [...room],
       products: room,
       roomDetail: 0,
       menu: ['Home', 'Shop', 'About'],
@@ -47,6 +53,29 @@ export default {
     },
     openRoomDetail(idx) {
       this.roomDetail = idx;
+    },
+    priceSort() {
+      this.products.sort(function (a, b) {
+        return a.price - b.price;
+      });
+    },
+    priceReverseSort() {
+      this.products.sort(function (a, b) {
+        return b.price - a.price;
+      });
+    },
+    titleSort() {
+      this.products.sort(function (a, b) {
+        let nameA = a.title.toUpperCase();
+        let nameB = b.title.toUpperCase();
+        if (nameA < nameB) return -1;
+        if (nameA > nameB) return 1;
+        return 0;
+      });
+    },
+    sortBack() {
+      // 등호로 배열을 집어넣으면 값을 서로 공유해주세요~ 가 된다.
+      this.products = [...this.productsOriginal];
     },
   },
   components: {

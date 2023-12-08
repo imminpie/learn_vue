@@ -4,7 +4,8 @@
       <img :src="products[roomDetail].image" style="width: 100%" />
       <h4>{{ products[roomDetail].title }}</h4>
       <p>{{ products[roomDetail].content }}</p>
-      <p>{{ products[roomDetail].price }} 원</p>
+      <p>{{ month }} 개월 선택함 : {{ products[roomDetail].price * month }} 원</p>
+      <input type="text" v-model="month" />
       <button @click="$emit('closeModal')">닫기</button>
     </div>
   </div>
@@ -12,6 +13,11 @@
 <script>
 export default {
   name: 'TheModal',
+  data() {
+    return {
+      month: 1,
+    };
+  },
   props: {
     products: Array,
     roomDetail: Number,

@@ -26,7 +26,9 @@
     </div>
   </nav>
 
-  <router-view :posts="posts"></router-view>
+  <div class="mt-4">
+    <router-view :posts="posts"></router-view>
+  </div>
 </template>
 
 <script>

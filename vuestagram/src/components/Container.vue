@@ -6,19 +6,20 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image" :style="{ background: `url(${imageUrl})` }"></div>
+      <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <FilterBox
+          v-for="(filters, idx) in filter"
+          :key="filters"
+          :imageUrl="imageUrl"
+          :filter="filter[idx]"
+        ></FilterBox>
       </div>
     </div>
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image" :style="{ background: `url(${imageUrl})` }"></div>
+      <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
       <div class="write">
         <textarea
           class="write-box"
@@ -31,12 +32,15 @@
 </template>
 <script>
 import Post from './Post.vue';
+import FilterBox from './FilterBox.vue';
+import filter from './../assets/filter.js';
 export default {
   //eslint-disable-next-line
   name: 'Container',
   data() {
     return {
       content: '',
+      filter: filter,
     };
   },
   props: {
@@ -52,6 +56,7 @@ export default {
   },
   components: {
     Post,
+    FilterBox,
   },
 };
 </script>
@@ -61,6 +66,7 @@ export default {
   height: 450px;
   background: cornflowerblue;
   background-size: cover;
+  background-position: center;
 }
 .filters {
   overflow-x: scroll;

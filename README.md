@@ -1,28 +1,29 @@
-- 뷰 설치
+뷰 설치
 
-  ```bash
-  $ npm install -g @vue/cli
-  ```
+```bash
+$ npm install -g @vue/cli
+```
 
-- 프로젝트 생성
+프로젝트 생성
 
-  ```bash
-  $ vue create 프로젝트명
-  ```
+```bash
+$ vue create 프로젝트명
+```
 
-- 프로젝트 실행
+프로젝트 실행
 
-  ```bash
-  $ npm run serve
-  ```
+```bash
+$ npm run serve
+```
 
-- Vue Router 설치
+Vue Router 설치
 
-  ```bash
-  $ npm install vue-router@4
-  ```
+```bash
+$ npm install vue-router@4
+```
 
-- 익스텐션
-  - vue 3 snippets
-  - Vue Language Features (Volar)
-  - HTML CSS Support
+익스텐션
+
+- vue 3 snippets
+- Vue Language Features (Volar)
+- HTML CSS Support

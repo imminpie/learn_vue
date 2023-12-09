@@ -13,7 +13,8 @@
           :key="filters"
           :imageUrl="imageUrl"
           :filter="filter[idx]"
-        ></FilterBox>
+          >{{ filter[idx] }}</FilterBox
+        >
       </div>
     </div>
 

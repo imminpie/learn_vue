@@ -1,6 +1,6 @@
 <template>
   <div :class="`${filter} filter-item`" :style="{ backgroundImage: `url(${imageUrl})` }">
-    {{ filter }}
+    <slot></slot>
   </div>
 </template>
 <script>

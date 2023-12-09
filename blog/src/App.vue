@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Vuelog</a>
+      <router-link class="nav-link" to="/">Vuelog</router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,29 +16,20 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <router-link class="nav-link" to="/list">게시글</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <router-link class="nav-link" to="/detail">상세</router-link>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container">
-    <h5>React 개발자의 블로그입니다.</h5>
-    <p>- Vue 로 만들었음 -</p>
-  </div>
-
-  <ListItem :posts="posts" />
+  <router-view :posts="posts"></router-view>
 </template>
 
 <script>
-import ListItem from './components/ListItem.vue';
 import posts from './assets/posts.js';
 export default {
   name: 'App',
@@ -47,9 +38,7 @@ export default {
       posts: posts,
     };
   },
-  components: {
-    ListItem,
-  },
+  components: {},
 };
 </script>
 

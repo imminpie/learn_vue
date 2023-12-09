@@ -1,19 +1,25 @@
 - 뷰 설치
 
   ```bash
-  npm install -g @vue/cli
+  $ npm install -g @vue/cli
   ```
 
 - 프로젝트 생성
 
   ```bash
-  vue create 프로젝트명
+  $ vue create 프로젝트명
   ```
 
 - 프로젝트 실행
 
   ```bash
-  npm run serve
+  $ npm run serve
+  ```
+
+- Vue Router 설치
+
+  ```bash
+  $ npm install vue-router@4
   ```
 
 - 익스텐션

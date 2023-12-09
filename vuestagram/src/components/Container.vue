@@ -6,7 +6,7 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image" :style="{ background: `url(${url})` }"></div>
+      <div class="upload-image" :style="{ background: `url(${imageUrl})` }"></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -18,9 +18,13 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image" :style="{ background: `url(${url})` }"></div>
+      <div class="upload-image" :style="{ background: `url(${imageUrl})` }"></div>
       <div class="write">
-        <textarea class="write-box">글 작성 화면</textarea>
+        <textarea
+          class="write-box"
+          @input="handleContent"
+          placeholder="내용을 입력하세요."
+        ></textarea>
       </div>
     </div>
   </div>
@@ -30,10 +34,21 @@ import Post from './Post.vue';
 export default {
   //eslint-disable-next-line
   name: 'Container',
+  data() {
+    return {
+      content: '',
+    };
+  },
   props: {
     posts: Array,
     step: Number,
-    url: String,
+    imageUrl: String,
+  },
+  methods: {
+    handleContent(e) {
+      this.content = e.target.value;
+      this.$emit('createPost', this.content);
+    },
   },
   components: {
     Post,

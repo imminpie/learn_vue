@@ -4,12 +4,13 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li @click="step++">Next</li>
+      <li v-if="step === 1" @click="step++">Next</li>
+      <li v-if="step === 2" @click="publish">발행</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :posts="posts" :step="step" :url="url" />
+  <Container :posts="posts" :step="step" :imageUrl="imageUrl" @createPost="create" />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -32,7 +33,8 @@ export default {
       posts,
       moreCount: 0,
       step: 0,
-      url: '',
+      imageUrl: '',
+      content: '',
     };
   },
   methods: {
@@ -45,8 +47,25 @@ export default {
     upload(e) {
       const file = e.target.files[0];
       const url = URL.createObjectURL(file);
-      this.url = url;
+      this.imageUrl = url;
       this.step++;
+    },
+    create(value) {
+      this.content = value;
+    },
+    publish() {
+      const post = {
+        name: 'imminpie',
+        userImage: 'https://picsum.photos/100?random=3',
+        postImage: this.imageUrl,
+        likes: 100,
+        date: 'Dec, 9',
+        liked: false,
+        content: this.content,
+        filter: 'clarendon',
+      };
+      this.posts = [post, ...posts];
+      this.step = 0;
     },
   },
   components: {

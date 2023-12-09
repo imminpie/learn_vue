@@ -15,6 +15,9 @@
   <button @click="$store.commit('changeName')">버튼</button>
   <button @click="$store.commit('changeAge', 10)">10씩 나이 증가</button>
 
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getMoreDate')">더보기버튼</button>
+
   <Container
     :imageFilter="imageFilter"
     :posts="posts"

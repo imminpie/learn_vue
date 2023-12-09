@@ -18,6 +18,14 @@
   <p>{{ $store.state.more }}</p>
   <button @click="$store.dispatch('getMoreDate')">더보기버튼</button>
 
+  <p>{{ now }} {{ counter }}</p>
+  <!-- now : 날짜가 변경된다. -->
+
+  <p>{{ now2 }} {{ counter }}</p>
+  <!-- now2 : computed 는 괄호 쓰면 안 된다. 날짜가 변경되지 않는다. -->
+
+  <button @click="counter++">날짜버튼</button>
+
   <Container
     :imageFilter="imageFilter"
     :posts="posts"
@@ -50,9 +58,21 @@ export default {
       imageUrl: '',
       content: '',
       imageFilter: '',
+      counter: 0,
     };
   },
+  computed: {
+    // 자신과 관련이 없다면 재렌더링 되지 않는다.
+    // 미리 캐싱된 값을 사용한다.
+    now2() {
+      return new Date();
+    },
+  },
   methods: {
+    // methods 함수는 렌더링될 때마다 실행된다.
+    now() {
+      return new Date();
+    },
     more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`).then((res) => {
         this.posts = [...this.posts, res.data];

@@ -18,6 +18,11 @@
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
+
+  <div v-if="step === 0">내용0</div>
+  <div v-if="step === 1">내용1</div>
+  <div v-if="step === 2">내용2</div>
+  <button @click="step = idx" v-for="(buttons, idx) in 3" :key="buttons">버튼 {{ idx }}</button>
 </template>
 
 <script>
@@ -29,6 +34,7 @@ export default {
   name: 'App',
   data() {
     return {
+      step: 0,
       posts,
       moreCount: 0,
     };

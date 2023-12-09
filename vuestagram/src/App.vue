@@ -10,7 +10,13 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :posts="posts" :step="step" :imageUrl="imageUrl" @createPost="create" />
+  <Container
+    :imageFilter="imageFilter"
+    :posts="posts"
+    :step="step"
+    :imageUrl="imageUrl"
+    @createPost="create"
+  />
   <button @click="more">더보기</button>
 
   <div class="footer">
@@ -35,6 +41,7 @@ export default {
       step: 0,
       imageUrl: '',
       content: '',
+      imageFilter: '',
     };
   },
   methods: {
@@ -62,11 +69,17 @@ export default {
         date: 'Dec, 9',
         liked: false,
         content: this.content,
-        filter: 'clarendon',
+        filter: this.imageFilter,
       };
       this.posts = [post, ...posts];
       this.step = 0;
     },
+  },
+  mounted() {
+    // this.emitter.on('작명', (이벤트데이터) => {}) -> 수신
+    this.emitter.on('imageFilter', (data) => {
+      this.imageFilter = data;
+    });
   },
   components: {
     Container,

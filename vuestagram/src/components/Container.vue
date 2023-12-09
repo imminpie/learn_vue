@@ -6,7 +6,10 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
+      <div
+        :class="`upload-image ${imageFilter}`"
+        :style="{ backgroundImage: `url(${imageUrl})` }"
+      ></div>
       <div class="filters">
         <FilterBox
           v-for="(filters, idx) in filter"
@@ -20,7 +23,11 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image" :style="{ backgroundImage: `url(${imageUrl})` }"></div>
+      <div
+        class="upload-image"
+        :class="imageFilter"
+        :style="{ backgroundImage: `url(${imageUrl})` }"
+      ></div>
       <div class="write">
         <textarea
           class="write-box"
@@ -48,6 +55,7 @@ export default {
     posts: Array,
     step: Number,
     imageUrl: String,
+    imageFilter: String,
   },
   methods: {
     handleContent(e) {

@@ -10,21 +10,14 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <h4>안녕 {{ $store.state.name }}</h4>
-  <p>나이: {{ $store.state.age }}</p>
-  <button @click="$store.commit('changeName')">버튼</button>
+  <h4>안녕 {{ name }}</h4>
+  <p>나이: {{ age }}</p>
+  <button @click="changeName">버튼</button>
   <button @click="$store.commit('changeAge', 10)">10씩 나이 증가</button>
 
-  <p>{{ $store.state.more }}</p>
+  <p>{{ myName }}</p>
+  {{ more }}
   <button @click="$store.dispatch('getMoreDate')">더보기버튼</button>
-
-  <p>{{ now }} {{ counter }}</p>
-  <!-- now : 날짜가 변경된다. -->
-
-  <p>{{ now2 }} {{ counter }}</p>
-  <!-- now2 : computed 는 괄호 쓰면 안 된다. 날짜가 변경되지 않는다. -->
-
-  <button @click="counter++">날짜버튼</button>
 
   <Container
     :imageFilter="imageFilter"
@@ -47,6 +40,7 @@
 import Container from './components/Container.vue';
 import posts from './assets/posts.js';
 import axios from 'axios';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
   name: 'App',
@@ -58,21 +52,27 @@ export default {
       imageUrl: '',
       content: '',
       imageFilter: '',
-      counter: 0,
     };
   },
   computed: {
-    // 자신과 관련이 없다면 재렌더링 되지 않는다.
-    // 미리 캐싱된 값을 사용한다.
-    now2() {
-      return new Date();
+    // 자주 꺼내쓰는 state 를 computed 에 넣어놓으면
+    // 매번 $store.state.name 작성하지 않아도 된다.
+    // computed 함수는 methods 와 다르게 항상 return 을 작성해 주어야 한다.
+    name() {
+      return this.$store.state.name;
     },
+    // mapState 쓰면 computed 코드가 짧아진다.
+    // store 에 있던 state 이름을 작성해주면 된다.
+    ...mapState(['name', 'age', 'likes', 'more']),
+
+    // object 도 사용할 수 있다.
+    ...mapState({ myName: 'name' }),
+
+    // mutations 함수도 사용할 수 있다.
+    // $state.commit() 를 작성하지 않아도 된다.
+    ...mapMutations(['changeName']),
   },
   methods: {
-    // methods 함수는 렌더링될 때마다 실행된다.
-    now() {
-      return new Date();
-    },
     more() {
       axios.get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`).then((res) => {
         this.posts = [...this.posts, res.data];

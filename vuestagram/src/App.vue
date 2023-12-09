@@ -10,6 +10,11 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4>안녕 {{ $store.state.name }}</h4>
+  <p>나이: {{ $store.state.age }}</p>
+  <button @click="$store.commit('changeName')">버튼</button>
+  <button @click="$store.commit('changeAge', 10)">10씩 나이 증가</button>
+
   <Container
     :imageFilter="imageFilter"
     :posts="posts"

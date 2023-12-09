@@ -4,17 +4,17 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :posts="posts" :step="step" />
+  <Container :posts="posts" :step="step" :url="url" />
   <button @click="more">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" type="file" id="file" class="input-file" />
       <label for="file" class="input-plus">+</label>
     </ul>
   </div>
@@ -32,6 +32,7 @@ export default {
       posts,
       moreCount: 0,
       step: 0,
+      url: '',
     };
   },
   methods: {
@@ -40,6 +41,12 @@ export default {
         this.posts = [...this.posts, res.data];
         this.moreCount++;
       });
+    },
+    upload(e) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      this.url = url;
+      this.step++;
     },
   },
   components: {
@@ -108,7 +115,7 @@ ul {
   height: 600px;
   background-color: bisque;
 }
-.inputfile {
+.input-file {
   display: none;
 }
 .input-plus {

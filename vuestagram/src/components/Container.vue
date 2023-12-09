@@ -6,7 +6,7 @@
 
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="{ background: `url(${url})` }"></div>
       <div class="filters">
         <div class="filter-1"></div>
         <div class="filter-1"></div>
@@ -18,7 +18,7 @@
 
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
-      <div class="upload-image"></div>
+      <div class="upload-image" :style="{ background: `url(${url})` }"></div>
       <div class="write">
         <textarea class="write-box">글 작성 화면</textarea>
       </div>
@@ -33,6 +33,7 @@ export default {
   props: {
     posts: Array,
     step: Number,
+    url: String,
   },
   components: {
     Post,
